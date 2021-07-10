@@ -1,0 +1,6 @@
+const char* ssid     = "<SSID>";
+const char* password = "<password>";
+const char* device_id = "spinklerbutton";
+const char* host = "198.0.0.94";
+const char* login_text = "{\"pwd\": \"<rainmachine-password>\",\"remember\": true}";
+const uint16_t port = 8080;
