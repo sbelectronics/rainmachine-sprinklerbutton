@@ -14,6 +14,10 @@
 
 #include "private_settings.h"
 
+// HOST is the IP address of the sprinkler controller.
+
+#define HOST "198.0.0.94:8080"
+
 // Holds buffer space for parsing JSON responses from the server.
 StaticJsonDocument<512> doc;
 
@@ -29,7 +33,7 @@ int login(BearSSL::WiFiClientSecure *client, char *token)
    HTTPClient https;
 
   Serial.print("[HTTPS] begin login request...\r\n");
-  if (!https.begin(*client, "https://198.0.0.94:8080/api/4/auth/login")) {
+  if (!https.begin(*client, "https://" HOST "/api/4/auth/login")) {
     Serial.printf("[HTTPS] Unable to connect\r\n");
     return -1;
   }
@@ -81,7 +85,7 @@ int getQueue(BearSSL::WiFiClientSecure *client, char *token)
   char url[128];
   HTTPClient https;
 
-  sprintf(url, "https://198.0.0.94:8080/api/4/watering/queue?access_token=%s", token);
+  sprintf(url, "https://" HOST "/api/4/watering/queue?access_token=%s", token);
 
   Serial.print("[HTTPS] begin getQueue request...\r\n");
   if (!https.begin(*client, url)) {
@@ -107,7 +111,7 @@ int zoneStart(BearSSL::WiFiClientSecure *client, char *token, int zone, int dura
   char url[128], timeRequest[32];
   HTTPClient https;
 
-  sprintf(url, "https://198.0.0.94:8080/api/4/zone/%d/start?access_token=%s", zone, token);
+  sprintf(url, "https://" HOST "/api/4/zone/%d/start?access_token=%s", zone, token);
 
   sprintf(timeRequest, "{\"time\": %d}", duration);
 
@@ -135,7 +139,7 @@ int zoneStop(BearSSL::WiFiClientSecure *client, char *token, int zone)
   char url[128];
   HTTPClient https;
 
-  sprintf(url, "https://198.0.0.94:8080/api/4/zone/%d/stop?access_token=%s", zone, token);
+  sprintf(url, "https://" HOST "/api/4/zone/%d/stop?access_token=%s", zone, token);
 
   Serial.print("[HTTPS] begin zone stop post request...\r\n");
   if (!https.begin(*client, url)) {

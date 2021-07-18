@@ -1,6 +1,11 @@
+// Put the SSID of your wifi network here
 const char* ssid     = "<SSID>";
+
+// Put the password for your wifi network here
 const char* password = "<password>";
+
+// This can be any string you'd like; probably shows up in DHCP log on your router
 const char* device_id = "spinklerbutton";
-const char* host = "198.0.0.94";
+
+// Put the password for your rainmachine sprinkler controller in here
 const char* login_text = "{\"pwd\": \"<rainmachine-password>\",\"remember\": true}";
-const uint16_t port = 8080;
